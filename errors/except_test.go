@@ -36,7 +36,7 @@ func TestExcept(t *testing.T) {
 
 func TestExceptFn(t *testing.T) {
 	type args struct {
-		fn     func() error
+		fn     ErrorFn
 		ignore []error
 	}
 	for _, tt := range []struct {
@@ -63,7 +63,7 @@ func TestExceptFn(t *testing.T) {
 
 func TestExceptFn2(t *testing.T) {
 	type args struct {
-		fn     func() (any, error)
+		fn     ErrorFn2[any]
 		ignore []error
 	}
 	for _, tt := range []struct {
@@ -94,7 +94,7 @@ func TestExceptFn2(t *testing.T) {
 
 func TestExceptFn3(t *testing.T) {
 	type args struct {
-		fn     func() (any, any, error)
+		fn     ErrorFn3[any, any]
 		ignore []error
 	}
 	for _, tt := range []struct {

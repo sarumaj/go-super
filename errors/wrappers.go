@@ -1,13 +1,15 @@
 package errors
 
-type W1 interface {
-	func() error
-}
+type (
+	ErrorFn            func() error
+	ErrorFn2[T any]    func() (T, error)
+	ErrorFn3[T, U any] func() (T, U, error)
+)
 
-type W2[T any] interface {
-	func() (T, error)
-}
+func W(err error) ErrorFn { return func() error { return err } }
 
-type W3[T, U any] interface {
-	func() (T, U, error)
+func W2[T any](t T, err error) ErrorFn2[T] { return func() (T, error) { return t, err } }
+
+func W3[T, U any](t T, u U, err error) ErrorFn3[T, U] {
+	return func() (T, U, error) { return t, u, err }
 }
