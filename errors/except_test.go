@@ -36,34 +36,7 @@ func TestExcept(t *testing.T) {
 
 func TestExceptFn(t *testing.T) {
 	type args struct {
-		fn     ErrorFn
-		ignore []error
-	}
-	for _, tt := range []struct {
-		name string
-		args args
-		want string
-	}{
-		{"test#1", args{func() error { return nil }, nil}, ""},
-		{"test#2", args{func() error { return os.ErrExist }, nil}, os.ErrExist.Error()},
-		{"test#3", args{func() error { return os.ErrExist }, []error{os.ErrExist}}, ""},
-	} {
-		t.Run(tt.name, func(t *testing.T) {
-			buffer := bytes.NewBuffer(nil)
-			RegisterCallback(func(err error) { buffer.WriteString(err.Error()) })
-			ExceptFn(tt.args.fn, tt.args.ignore...)
-			got := buffer.String()
-
-			if got != tt.want {
-				t.Errorf(`ExceptFn(%p, %v) failed: got: %q, want: %q`, tt.args.fn, tt.args.ignore, got, tt.want)
-			}
-		})
-	}
-}
-
-func TestExceptFn2(t *testing.T) {
-	type args struct {
-		fn     ErrorFn2[any]
+		fn     ErrorFn[any]
 		ignore []error
 	}
 	for _, tt := range []struct {
@@ -78,7 +51,7 @@ func TestExceptFn2(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			buffer := bytes.NewBuffer(nil)
 			RegisterCallback(func(err error) { buffer.WriteString(err.Error()) })
-			ret := ExceptFn2(tt.args.fn, tt.args.ignore...)
+			ret := ExceptFn(tt.args.fn, tt.args.ignore...)
 			got := buffer.String()
 
 			if got != tt.want {
@@ -92,9 +65,9 @@ func TestExceptFn2(t *testing.T) {
 	}
 }
 
-func TestExceptFn3(t *testing.T) {
+func TestExceptFn2(t *testing.T) {
 	type args struct {
-		fn     ErrorFn3[any, any]
+		fn     ErrorFn2[any, any]
 		ignore []error
 	}
 	for _, tt := range []struct {
@@ -109,7 +82,7 @@ func TestExceptFn3(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			buffer := bytes.NewBuffer(nil)
 			RegisterCallback(func(err error) { buffer.WriteString(err.Error()) })
-			ret1, ret2 := ExceptFn3(tt.args.fn, tt.args.ignore...)
+			ret1, ret2 := ExceptFn2(tt.args.fn, tt.args.ignore...)
 			got := buffer.String()
 
 			if got != tt.want {

@@ -1,3 +1,8 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/sarumaj/go-super)](https://goreportcard.com/report/github.com/sarumaj/go-super)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability-percentage/sarumaj/go-super.svg)](https://codeclimate.com/github/sarumaj/go-super/maintainability)
+
+---
+
 # go-super
 Making Go more convenient
 
@@ -21,7 +26,7 @@ func main() {
   })
 
   // returns *os.File directly and calls callback only if error occures
-  file := supererrors.ExceptFn2(supererrors.W2(os.Create("file.txt)))
+  file := supererrors.ExceptFn(supererrors.W(os.Create("file.txt")))
 
   // try to close file and call callback on error which is not os.ErrClosed
   defer supererrors.Except(file.Close(), os.ErrClosed)
