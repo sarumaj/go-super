@@ -2,6 +2,7 @@ package errors
 
 import (
 	"bytes"
+	"fmt"
 	"os"
 	"testing"
 )
@@ -14,11 +15,11 @@ func TestExcept(t *testing.T) {
 	for _, tt := range []struct {
 		name string
 		args args
-		want string
+		want error
 	}{
-		{"test#1", args{nil, nil}, ""},
-		{"test#2", args{os.ErrExist, nil}, os.ErrExist.Error()},
-		{"test#3", args{os.ErrExist, []error{os.ErrExist}}, ""},
+		{"test#1", args{nil, nil}, fmt.Errorf("")},
+		{"test#2", args{os.ErrExist, nil}, os.ErrExist},
+		{"test#3", args{os.ErrExist, []error{os.ErrExist}}, fmt.Errorf("")},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
 			buffer := bytes.NewBuffer(nil)
@@ -26,7 +27,7 @@ func TestExcept(t *testing.T) {
 			Except(tt.args.err, tt.args.ignore...)
 			got := buffer.String()
 
-			if got != tt.want {
+			if got != tt.want.Error() {
 				t.Errorf(`Except(%v, %v) failed: got: %q, want: %q`, tt.args.err, tt.args.ignore, got, tt.want)
 			}
 		})

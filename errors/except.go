@@ -7,6 +7,8 @@ func Except(err error, ignore ...error) {
 		return
 	}
 
+	lastError.store(err)
+
 	for _, e := range ignore {
 		if errors.Is(err, e) {
 			return
