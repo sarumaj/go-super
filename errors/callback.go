@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-// Storer for callback function.
+// Storage for callback function.
 var callback = (&defaultCallback{}).reset()
 
 // Store callback function
