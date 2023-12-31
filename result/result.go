@@ -42,7 +42,7 @@ func (r Result[O]) State() State {
 	return r.state
 }
 
-func (r Result[O]) Value() O {
+func (r Result[O]) Output() O {
 	return r.value
 }
 
