@@ -1,4 +1,5 @@
 # Custom Dictionary Words
+nums
 popitem
 pythonic
 Storer
