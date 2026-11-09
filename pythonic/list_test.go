@@ -64,7 +64,9 @@ func TestListBasicOperations(t *testing.T) {
 
 func TestListInsertExtendSliceReverseSort(t *testing.T) {
 	l := NewList(3, 1)
-	l.Insert(1, 2)
+	if err := l.Insert(1, 2); err != nil {
+		t.Fatalf("insert: %v", err)
+	}
 	if v, _ := l.Get(1); v != 2 {
 		t.Fatalf("expected inserted 2 at index 1, got %v", v)
 	}

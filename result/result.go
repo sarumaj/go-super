@@ -17,7 +17,7 @@ func (r Result[O]) Equals(other Result[O]) bool {
 	switch {
 	case
 		r.state != other.state,
-		!(r.fault == other.fault || errors.Is(r.fault, other.fault)),
+		r.fault != other.fault && !errors.Is(r.fault, other.fault),
 		!reflect.DeepEqual(r.value, other.value):
 
 		return false
