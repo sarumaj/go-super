@@ -1,5 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/sarumaj/go-super)](https://goreportcard.com/report/github.com/sarumaj/go-super)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability-percentage/sarumaj/go-super.svg)](https://codeclimate.com/github/sarumaj/go-super/maintainability)
+[![Maintainability](https://qlty.sh/gh/sarumaj/projects/go-super/maintainability.svg)](https://qlty.sh/gh/sarumaj/projects/go-super)
 
 ---
 
